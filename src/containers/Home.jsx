@@ -10,7 +10,8 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      iteration: new Iteration()
+      iteration: new Iteration(),
+      modalMesage: "No message"
     }
     this.handler = this.handler.bind(this);
   }

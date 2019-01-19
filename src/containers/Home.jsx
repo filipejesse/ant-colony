@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Container, Columns, Column, Box, Title, Notification } from 'bloomer';
+import Pheromone from '../components/menu/Pheromone';
 import Footer from '../components/menu/Footer';
 import AntTypeInput from '../components/menu/AntTypeInput';
 import Iteration from '../utils/Iteration';
-// import Feromony from '../components/menu/Feromony';
+import AddLimit from '../components/menu/AddLimit';
 
 class Home extends Component {
   constructor(props) {
@@ -30,7 +31,9 @@ class Home extends Component {
             <Column isSize="1/3">
               <Title>Menu</Title>
               <Box>
+                <Pheromone />
                 <AntTypeInput handler={this.handler} iteration={this.state.iteration} />
+                <AddLimit />
               </Box>
             </Column>
             <Column isSize="2/3">

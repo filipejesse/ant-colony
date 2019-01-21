@@ -2,11 +2,6 @@ import Ant from './Ant';
 
 class Iteration {
 
-  addClient({ client }) {
-    if (client !== "" && !this.hasOwnProperty(client)) {
-      this[client] = Array(0);
-    }
-  }
 
   addAntType({ antType }) {
     if (antType !== "" && !this.hasOwnProperty(antType)) {
@@ -24,11 +19,13 @@ class Iteration {
 
   updatePheromone() {
 
+  }
+
+  calcProbability() {
 
   }
 
   addAntToColony() {
-
 
   }
 }

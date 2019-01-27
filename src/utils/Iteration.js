@@ -1,17 +1,18 @@
-import Ant from './Ant';
+import Client from './Client';
 
 class Iteration {
 
-
-  addAntType({ antType }) {
-    if (antType !== "" && !this.hasOwnProperty(antType)) {
-      this[antType] = Array(0);
+  addNode({ address }) {
+    if (address !== "" && !this.hasOwnProperty(address)) {
+      this[address] = Array(0);
     }
   }
 
-  addLimit({antType, desc, limitation}) {
-    this[antType].push(new Ant(desc, limitation));
+  addDemand({address, desc, demand}){
+    this[address].push(new Client(desc, demand));
   }
+
+
 
   searchRoute() {
 

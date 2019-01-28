@@ -1,6 +1,11 @@
-import Client from './Client';
-
 class Iteration {
+
+  addFile( {file} ) {
+    console.log(file);
+    if (file !== "" && !this.hasOwnProperty(file)){
+      this[file] = [];
+    }
+  }
 
   addNode({ address }) {
     if (address !== "" && !this.hasOwnProperty(address)) {
@@ -8,26 +13,6 @@ class Iteration {
     }
   }
 
-  addDemand({address, desc, demand}){
-    this[address].push(new Client(desc, demand));
-  }
 
-
-
-  searchRoute() {
-
-  }
-
-  updatePheromone() {
-
-  }
-
-  calcProbability() {
-
-  }
-
-  addAntToColony() {
-
-  }
 }
 export default Iteration;

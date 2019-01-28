@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'bloomer';
 import FileBase64 from 'react-file-base64';
 import { Base64 } from 'js-base64';
-// var parser = require('xml2json');
-// import { parser } from 'xml2json';
+var convert = require('xml-js');
 
 class UploadFile extends Component {
   constructor(props) {
@@ -11,18 +10,16 @@ class UploadFile extends Component {
     this.state = {
       file: ''
     }
-
-    // this.handleChange = this.handleChange.bind(this);
     this.getFile = this.getFile.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit() {
-    // this.props.xml2js.addFile(this.state);
-    // this.props.handler({
-    //   xml2js: this.props.xml2js
-    // });
-    console.log(this.state.file);
+    // this.props.iteration.addFile(this.state);
+    this.props.handler({
+      xmlFile: this.state.file
+    });
+
     this.setState({
       file: ''
     });
@@ -31,10 +28,8 @@ class UploadFile extends Component {
   getFile(file) {
     let temp = file.base64.substring(21);
     temp = Base64.decode(temp);
+    temp = convert.xml2json(temp, {compact: true, spaces: 4});
     this.setState({file: temp});
-    // temp = parser.toJson(temp);
-    // console.log(temp);
-
   }
 
   render() {
@@ -43,7 +38,7 @@ class UploadFile extends Component {
         <FileBase64
           multiple={false}
           onDone={this.getFile} />
-        <Button isColor='info' onClick={this.handleSubmit} >Add</Button>
+        <Button isColor='info' onClick={this.handleSubmit}>Add</Button>
       </div>
     )
   }

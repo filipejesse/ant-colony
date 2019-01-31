@@ -1,51 +1,80 @@
 import React, { Component } from 'react';
 import { Paper, Set, Circle, Rect, Line } from 'react-raphael';
+import { Button } from 'bloomer';
 
 class Canvas extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      antMemory: []
+    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit() {
+    this.props.iteration.antWalk(this.props.xmlFile);
+  }
+
+
   render() {
-    let teste = [];
+    let nodes = [];
     let deposit;
     let lines = [];
     if (this.props.xmlFile.length > 0) {
       let x = JSON.parse(this.props.xmlFile);
-      console.log(x.instance);
       deposit = x.instance.fleet.vehicle_profile.departure_node._text;
-      teste = x.instance.network.nodes.node;
+      nodes = x.instance.network.nodes.node;
     }
 
     return (<Paper width={800} height={700}>
       <Set>
         {
-          teste.map(function (ele, pos) {
+          nodes.map(function (ele, pos) {
             if (ele._attributes.id === deposit) {
-              return (<Rect key={pos} x={parseInt(ele.cx._text) * 6} y={parseInt(ele.cy._text) * 6} width={15} height={15} attr={{ "fill": "#10a54a", "stroke": "#f0c620" }} />)
+              return (
+                <Rect
+                  key={pos}
+                  x={(parseInt(ele.cx._text) * 7) + 10}
+                  y={parseInt(ele.cy._text) * 7}
+                  width={15}
+                  height={15}
+                  attr={{ "fill": "#10a54a", "stroke": "#f0c620" }}
+                />
+              )
             }
             else {
               return (
-                <Circle key={pos} x={parseInt(ele.cx._text) * 6} y={parseInt(ele.cy._text) * 6} r={3} attr={{ "stroke": "#ff0000", "stroke-width": 5 }} animate={ele.animate} />
+                <Circle
+                  key={pos}
+                  x={(parseInt(ele.cx._text) * 7) + 10}
+                  y={parseInt(ele.cy._text) * 7}
+                  r={3}
+                  attr={{ "stroke": "#ff0000", "stroke-width": 5 }}
+                />
               )
             }
           })
         }
 
         {
-          teste.map((ele, pos) => {
-            return (teste.forEach((end, i) => {
+          nodes.map((ele, pos) => {
+            return (nodes.forEach((end, i) => {
               lines.push(
                 <Line key={pos + '-' + i}
-                  x1={parseInt(ele.cx._text) * 6}
-                  y1={parseInt(ele.cy._text) * 6}
-                  x2={parseInt(end.cx._text) * 6}
-                  y2={parseInt(end.cy._text) * 6}
+                  x1={parseInt((ele.cx._text) * 7) + 10}
+                  y1={parseInt(ele.cy._text) * 7}
+                  x2={parseInt((end.cx._text) * 7) + 10}
+                  y2={parseInt(end.cy._text) * 7}
                   attr={{ "stroke-width": 0.05 }}
                 />)
 
             }))
           })
         }
-        {lines}
+        {/* {lines} */}
       </Set>
+      <Button isColor='info' onClick={this.handleSubmit}>Start Iteration</Button>
     </Paper>)
   }
 }

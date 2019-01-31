@@ -5,6 +5,7 @@ import Iteration from '../utils/Iteration';
 import UploadFile from '../components/menu/UploadFile';
 import Canvas from '../components/menu/Canvas';
 import Info from '../components/menu/Info';
+import { Button } from 'bloomer/lib/elements/Button';
 
 class Home extends Component {
   constructor(props) {
@@ -38,12 +39,13 @@ class Home extends Component {
               <Title>Data</Title>
               <Box>
                 <Info xmlFile={this.state.xmlFile} />
+                <Button isColor='info'>Start Iteration</Button>
               </Box>
             </Column>
             <Column isSize="2/3">
               <Title>Iteration</Title>
               <Box>
-                <Canvas handler={this.handler} xmlFile={this.state.xmlFile}/>
+                <Canvas handler={this.handler} xmlFile={this.state.xmlFile} iteration={this.state.iteration}/>
               </Box>
             </Column>
           </Columns>

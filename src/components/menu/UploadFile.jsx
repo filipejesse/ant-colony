@@ -35,10 +35,8 @@ class UploadFile extends Component {
   render() {
     return (
       <div>
-        <FileBase64
-          multiple={false}
-          onDone={this.getFile} />
-        <Button isColor='info' onClick={this.handleSubmit}>Add</Button>
+        <FileBase64 multiple={false} onDone={this.getFile} />
+        <Button isColor='info' onClick={this.handleSubmit}>Show</Button>
       </div>
     )
   }
